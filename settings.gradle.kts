@@ -1,1 +1,1 @@
-rootProject.name = "Tritium-Mod-API"
+rootProject.name = "Tritium Mod API"

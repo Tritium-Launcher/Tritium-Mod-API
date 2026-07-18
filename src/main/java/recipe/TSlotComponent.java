@@ -39,6 +39,19 @@ public interface TSlotComponent extends TRecipeComponent
      */
     String getDisplayName();
 
+    /**
+     * Whether this slot is display-only (e.g. a fuel slot in a furnace).
+     * <p>
+     * Display-only slots accept no drops and interactions.
+     * The launcher renders them with a darkened overlay.
+     * </p>
+     *
+     * @return {@code true} if this slot should not accept any items
+     */
+    default boolean isDisplayOnly() {
+        return false;
+    }
+
     @Override
     default String getCategory() {
         return "SLOT";
@@ -52,6 +65,7 @@ public interface TSlotComponent extends TRecipeComponent
         data.put("isInput", isInput());
         data.put("maxCapacity", getMaxCapacity());
         data.put("displayName", getDisplayName());
+        data.put("displayOnly", isDisplayOnly());
         return data;
     }
 }

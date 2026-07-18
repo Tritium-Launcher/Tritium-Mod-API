@@ -20,13 +20,14 @@ public class TComponentHelpers
         private final boolean isInput;
         private final long maxCapacity;
         private final String displayName;
+        private final boolean displayOnly;
         private final int x;
         private final int y;
         private final int width;
         private final int height;
 
         public Slot(String slotType, String slotId, boolean isInput, long maxCapacity, String displayName) {
-            this(slotType, slotId, isInput, maxCapacity, displayName, 0, 0, 18, 18);
+            this(slotType, slotId, isInput, maxCapacity, displayName, false, 0, 0, 18, 18);
         }
 
         public Slot(
@@ -40,11 +41,27 @@ public class TComponentHelpers
                 int width,
                 int height
         ) {
+            this(slotType, slotId, isInput, maxCapacity, displayName, false, x, y, width, height);
+        }
+
+        public Slot(
+                String slotType,
+                String slotId,
+                boolean isInput,
+                long maxCapacity,
+                String displayName,
+                boolean displayOnly,
+                int x,
+                int y,
+                int width,
+                int height
+        ) {
             this.slotType = slotType;
             this.slotId = slotId;
             this.isInput = isInput;
             this.maxCapacity = maxCapacity;
             this.displayName = displayName;
+            this.displayOnly = displayOnly;
             this.x = x;
             this.y = y;
             this.width = width;
@@ -90,21 +107,28 @@ public class TComponentHelpers
          * Sets a custom display name.
          */
         public Slot withDisplayName(String name) {
-            return new Slot(slotType, slotId, isInput, maxCapacity, name, x, y, width, height);
+            return new Slot(slotType, slotId, isInput, maxCapacity, name, displayOnly, x, y, width, height);
         }
 
         /**
          * Sets render bounds on the recipe background.
          */
         public Slot at(int x, int y) {
-            return new Slot(slotType, slotId, isInput, maxCapacity, displayName, x, y, width, height);
+            return new Slot(slotType, slotId, isInput, maxCapacity, displayName, displayOnly, x, y, width, height);
         }
 
         /**
          * Sets render bounds on the recipe background.
          */
         public Slot bounds(int x, int y, int width, int height) {
-            return new Slot(slotType, slotId, isInput, maxCapacity, displayName, x, y, width, height);
+            return new Slot(slotType, slotId, isInput, maxCapacity, displayName, displayOnly, x, y, width, height);
+        }
+
+        /**
+         * Marks this slot as display-only (no drops or interactions).
+         */
+        public Slot withDisplayOnly() {
+            return new Slot(slotType, slotId, isInput, maxCapacity, displayName, true, x, y, width, height);
         }
 
         @Override
@@ -130,6 +154,11 @@ public class TComponentHelpers
         @Override
         public String getDisplayName() {
             return displayName;
+        }
+
+        @Override
+        public boolean isDisplayOnly() {
+            return displayOnly;
         }
 
         @Override

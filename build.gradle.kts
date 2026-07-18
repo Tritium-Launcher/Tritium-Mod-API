@@ -6,7 +6,7 @@ plugins {
 
 group = "io.github.tritium_launcher"
 val artifactId = "tritium-mod-api"
-version = "0.1.2"
+version = "0.1.3-SNAPSHOT"
 
 java {
     withSourcesJar()
