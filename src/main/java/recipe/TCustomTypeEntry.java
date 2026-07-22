@@ -25,10 +25,6 @@ public record TCustomTypeEntry(
         Map<String, Object> rawData
 )
 {
-    /**
-     * Compact canonical constructor.
-     * Defensively copies and protects the {@code rawData} map.
-     */
     public TCustomTypeEntry {
         rawData = Collections.unmodifiableMap(new LinkedHashMap<>(rawData));
     }

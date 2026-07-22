@@ -25,6 +25,11 @@ public record TRecipeSprite(
         List<TSpriteRegion> regions,
         Map<String, String> slotTextures
 ) {
+    public TRecipeSprite {
+        regions = List.copyOf(regions);
+        slotTextures = Map.copyOf(slotTextures);
+    }
+
     /**
      * Creates a sprite with no custom slot textures.
      * The launcher will use default colored overlays for all slot types.

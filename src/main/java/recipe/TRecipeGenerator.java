@@ -1,9 +1,9 @@
 package recipe;
 
-import org.jspecify.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 /**
  * Generates recipe definitions from user-provided slot fills in the recipe
@@ -41,11 +41,16 @@ public interface TRecipeGenerator {
 
     /**
      * Returns launcher-side generation templates for this generator.
+     * <p>
+     * When present, the launcher uses these templates for client-side code
+     * generation instead of calling {@link #generate(Map, String, Map)} in-game.
+     * When empty, the generator relies on in-game generation only.
+     * </p>
      *
-     * @return generation templates, or {@code null} to rely on in-game generation
+     * @return an {@link Optional} containing the templates, or empty
      */
-    default @Nullable GenerationTemplates getGenerationTemplates() {
-        return null;
+    default Optional<GenerationTemplates> getGenerationTemplates() {
+        return Optional.empty();
     }
 
     /**

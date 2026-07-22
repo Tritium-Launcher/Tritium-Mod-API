@@ -2,8 +2,10 @@ package recipe;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * Simple implementations of recipe components.
@@ -193,6 +195,22 @@ public class TComponentHelpers
         public int height() {
             return height;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof Slot slot)) return false;
+            return isInput == slot.isInput && maxCapacity == slot.maxCapacity
+                    && displayOnly == slot.displayOnly && x == slot.x && y == slot.y
+                    && width == slot.width && height == slot.height
+                    && slotType.equals(slot.slotType) && slotId.equals(slot.slotId)
+                    && displayName.equals(slot.displayName);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(slotType, slotId, isInput, maxCapacity, displayName, displayOnly, x, y, width, height);
+        }
     }
 
     /**
@@ -281,6 +299,20 @@ public class TComponentHelpers
         public int height() {
             return height;
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (!(o instanceof GenericEnergy that)) return false;
+            return amount == that.amount && x == that.x && y == that.y
+                    && width == that.width && height == that.height
+                    && energyType.equals(that.energyType);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(energyType, amount, x, y, width, height);
+        }
     }
 
     /**
@@ -338,6 +370,10 @@ public class TComponentHelpers
     public record Custom(String id, String category, Map<String, Object> data, int x, int y, int width,
                          int height) implements TRecipeComponent
     {
+        public Custom {
+            data = Map.copyOf(data);
+        }
+
         public Custom(String id, String category) {
             this(id, category, 0, 0, 18, 18);
         }
@@ -354,22 +390,22 @@ public class TComponentHelpers
         }
 
         /**
-         * Adds a property to this component.
+         * Returns a new {@code Custom} with an additional property.
+         * The original record is not modified.
          */
         public Custom with(String key, Object value) {
-            data.put(key, value);
-            return this;
+            Map<String, Object> next = new LinkedHashMap<>(data);
+            next.put(key, value);
+            return new Custom(id, category, next, x, y, width, height);
         }
 
         public Custom bounds(int x, int y, int width, int height) {
-            Custom custom = new Custom(id, category, x, y, width, height);
-            custom.data.putAll(data);
-            return custom;
+            return new Custom(id, category, new LinkedHashMap<>(data), x, y, width, height);
         }
 
         @Override
         public Map<String, Object> data() {
-            return new HashMap<>(data);
+            return data;
         }
     }
 
@@ -422,25 +458,13 @@ public class TComponentHelpers
          * Builds the UI layout.
          */
         public TUILayout build() {
-            return new TUILayout()
-            {
-                private final List<TUIElement> elementsCopy = new ArrayList<>(elements);
+            return new BuiltLayout(width, height, List.copyOf(elements));
+        }
 
-                @Override
-                public int getWidth() {
-                    return width;
-                }
-
-                @Override
-                public int getHeight() {
-                    return height;
-                }
-
-                @Override
-                public List<TUIElement> getElements() {
-                    return elementsCopy;
-                }
-            };
+        private record BuiltLayout(int w, int h, List<TUIElement> els) implements TUILayout {
+            @Override public int getWidth() { return w; }
+            @Override public int getHeight() { return h; }
+            @Override public List<TUIElement> getElements() { return els; }
         }
     }
 

@@ -1,9 +1,9 @@
 package recipe;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Central registry for custom value type providers.
@@ -11,7 +11,7 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 public final class TCustomTypeRegistry
 {
-    private static final Map<String, TCustomTypeProvider> PROVIDERS = new LinkedHashMap<>();
+    private static final Map<String, TCustomTypeProvider> PROVIDERS = new ConcurrentHashMap<>();
 
     private TCustomTypeRegistry() {}
 
@@ -23,10 +23,10 @@ public final class TCustomTypeRegistry
      */
     public static void register(TCustomTypeProvider provider) {
         String id = provider.getDescriptor().getTypeId();
-        if (PROVIDERS.containsKey(id)) {
+        TCustomTypeProvider existing = PROVIDERS.computeIfAbsent(id, k -> provider);
+        if (existing != provider) {
             throw new IllegalStateException("Custom type provider already registered: " + id);
         }
-        PROVIDERS.put(id, provider);
     }
 
     /**
@@ -42,10 +42,10 @@ public final class TCustomTypeRegistry
     /**
      * Returns all registered custom type providers.
      *
-     * @return a live view of all registered providers (never {@code null})
+     * @return a snapshot of all registered providers (never {@code null})
      */
-    public static Collection<TCustomTypeProvider> getProviders() {
-        return PROVIDERS.values();
+    public static List<TCustomTypeProvider> getProviders() {
+        return List.copyOf(PROVIDERS.values());
     }
 
     /**

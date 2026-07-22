@@ -1,9 +1,9 @@
 package recipe;
 
-import java.util.Collection;
-import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Central registry for recipe generation output formats.
@@ -16,7 +16,7 @@ import java.util.Optional;
 @SuppressWarnings("unused")
 public final class TGenerationTypeRegistry
 {
-    private static final Map<String, TGenerationFormat> FORMATS = new LinkedHashMap<>();
+    private static final Map<String, TGenerationFormat> FORMATS = new ConcurrentHashMap<>();
 
     static {
         register("json", "JSON");
@@ -48,8 +48,8 @@ public final class TGenerationTypeRegistry
     /**
      * Returns all registered formats.
      */
-    public static Collection<TGenerationFormat> getAll() {
-        return FORMATS.values();
+    public static List<TGenerationFormat> getAll() {
+        return List.copyOf(FORMATS.values());
     }
 
     /**

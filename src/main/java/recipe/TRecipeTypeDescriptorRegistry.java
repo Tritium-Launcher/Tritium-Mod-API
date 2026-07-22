@@ -1,8 +1,8 @@
 package recipe;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * Central registry for Recipe Type descriptors.
@@ -16,7 +16,7 @@ public class TRecipeTypeDescriptorRegistry
     /**
      * Internal storage for registered descriptors.
      */
-    private static final Map<String, TRecipeTypeDescriptor> DESCRIPTORS = new HashMap<>();
+    private static final Map<String, TRecipeTypeDescriptor> DESCRIPTORS = new ConcurrentHashMap<>();
 
     /**
      * Registers a recipe type descriptor.
@@ -26,10 +26,10 @@ public class TRecipeTypeDescriptorRegistry
      */
     public static void register(TRecipeTypeDescriptor descriptor) {
         String id = descriptor.getRecipeTypeId();
-        if(DESCRIPTORS.containsKey(id)) {
+        TRecipeTypeDescriptor existing = DESCRIPTORS.computeIfAbsent(id, k -> descriptor);
+        if (existing != descriptor) {
             throw new IllegalStateException("Recipe type descriptor already registered: " + id);
         }
-        DESCRIPTORS.put(id, descriptor);
     }
 
     /**
@@ -58,7 +58,7 @@ public class TRecipeTypeDescriptorRegistry
      * @return A new Map of all registered descriptors
      */
     public static Map<String, TRecipeTypeDescriptor> getDescriptors() {
-        return new HashMap<>(DESCRIPTORS);
+        return Map.copyOf(DESCRIPTORS);
     }
 
     /**

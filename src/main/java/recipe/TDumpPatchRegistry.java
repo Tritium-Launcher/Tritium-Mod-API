@@ -1,8 +1,7 @@
 package recipe;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 /**
  * Global registry for {@link TDumpPatch} instances.
@@ -11,7 +10,7 @@ import java.util.List;
 @SuppressWarnings("unused")
 public final class TDumpPatchRegistry
 {
-    private static final List<TDumpPatch> patches = new ArrayList<>();
+    private static final List<TDumpPatch> patches = new CopyOnWriteArrayList<>();
 
     private TDumpPatchRegistry() {}
 
@@ -32,10 +31,10 @@ public final class TDumpPatchRegistry
     /**
      * Returns all registered dump patches.
      *
-     * @return an unmodifiable list of registered patches (never {@code null})
+     * @return a snapshot of registered patches (never {@code null})
      */
     public static List<TDumpPatch> getPatches()
     {
-        return Collections.unmodifiableList(patches);
+        return List.copyOf(patches);
     }
 }

@@ -21,11 +21,10 @@ tasks.withType<JavaCompile>().configureEach {
 
 repositories {
     mavenCentral()
-    google()
 }
 
 dependencies {
-    implementation("com.google.code.gson:gson:2.13.2")
+    api("com.google.code.gson:gson:2.13.2")
     api("org.jspecify:jspecify:1.0.0")
 }
 
@@ -82,7 +81,6 @@ tasks.matching { it.name == "generateMetadataFileForMavenPublication" }.configur
 
 afterEvaluate {
     publishing.publications.withType(MavenPublication::class.java).forEach { pub ->
-        println("Publication '${pub.name}':")
         pub.artifacts.forEach { a ->
             println("  - extension='${a.extension}', classifier='${a.classifier}', file='${a.file?.name}'")
         }

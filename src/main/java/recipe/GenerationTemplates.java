@@ -55,6 +55,7 @@ public record GenerationTemplates(
             copy.put(fmtId, Collections.unmodifiableMap(new LinkedHashMap<>(variants)));
         }
         formats = Collections.unmodifiableMap(copy);
+        variantDefaults = Collections.unmodifiableMap(new LinkedHashMap<>(variantDefaults));
     }
 
     /**
