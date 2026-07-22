@@ -24,6 +24,15 @@ public record TRecipeSprite(
         List<TSpriteRegion> regions,
         Map<String, String> slotTextures
 ) {
+    /**
+     * Creates a sprite with no custom slot textures.
+     * The launcher will use default colored overlays for all slot types.
+     *
+     * @param imagePath path to the sprite in the mod's resources
+     * @param width     pixel width of the sprite
+     * @param height    pixel height of the sprite
+     * @param regions   the interactive slot regions on this sprite
+     */
     public TRecipeSprite(String imagePath, int width, int height, List<TSpriteRegion> regions) {
         this(imagePath, width, height, regions, Collections.emptyMap());
     }

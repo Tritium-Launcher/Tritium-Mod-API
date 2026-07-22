@@ -40,6 +40,11 @@ public record GenerationTemplates(
     Map<String, Map<String, String>> variantDefaults
 ) {
 
+    /**
+     * Compact canonical constructor.
+     * Defensively copies the {@code formats} map, filtering out null or empty
+     * variant entries, and protects the {@code variantDefaults} map.
+     */
     public GenerationTemplates {
         if (formats == null) {
             formats = Collections.emptyMap();

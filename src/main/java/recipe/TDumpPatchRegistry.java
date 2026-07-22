@@ -14,11 +14,25 @@ public final class TDumpPatchRegistry
 
     private TDumpPatchRegistry() {}
 
+    /**
+     * Registers a dump patch.
+     * <p>
+     * Patches are executed after all registry dumps complete,
+     * in registration order.
+     * </p>
+     *
+     * @param patch the patch to register (never {@code null})
+     */
     public static void register(TDumpPatch patch)
     {
         patches.add(patch);
     }
 
+    /**
+     * Returns all registered dump patches.
+     *
+     * @return an unmodifiable list of registered patches (never {@code null})
+     */
     public static List<TDumpPatch> getPatches()
     {
         return Collections.unmodifiableList(patches);

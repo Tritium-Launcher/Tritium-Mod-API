@@ -21,10 +21,20 @@ public record SlotFill(
         long quantity,
         Map<String, Object> data
 ) {
+    /**
+     * Creates a slot fill with no extra data components.
+     *
+     * @param itemId   the item or value identifier
+     * @param quantity the stack size or amount
+     */
     public SlotFill(String itemId, long quantity) {
         this(itemId, quantity, Collections.emptyMap());
     }
 
+    /**
+     * Compact canonical constructor.
+     * Defensively copies and protects the {@code data} map.
+     */
     public SlotFill {
         data = data == null
                 ? Collections.emptyMap()

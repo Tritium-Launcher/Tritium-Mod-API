@@ -30,6 +30,14 @@ public record TNormalizedRecipeView(
         return new Builder("fallback", null);
     }
 
+    /**
+     * Builder for constructing {@link TNormalizedRecipeView} instances.
+     * <p>
+     * Start with one of the factory methods ({@link #descriptor(String)} or
+     * {@link #fallback()}), then add bindings, inputs, outputs, and
+     * properties before calling {@link #build()}.
+     * </p>
+     */
     public static final class Builder {
         private final String mode;
         private final String descriptorId;

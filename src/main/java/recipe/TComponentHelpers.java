@@ -11,7 +11,19 @@ import java.util.Map;
 public class TComponentHelpers
 {
     /**
-     * Generic Slot component impl.
+     * A generic slot component implementation.
+     * <p>
+     * Supports Item slots, Fluid tanks, and custom value type slots with
+     * configurable input/output direction, capacity, display name, position,
+     * and display-only mode. Use the static factory methods for common
+     * configurations.
+     * </p>
+     *
+     * @see #itemInput(String, int)
+     * @see #itemOutput(String, int)
+     * @see #fluidInput(String, int)
+     * @see #fluidOutput(String, int)
+     * @see #custom(String, String, boolean, long)
      */
     public static class Slot implements TSlotComponent
     {
@@ -271,10 +283,24 @@ public class TComponentHelpers
     }
 
         /**
-         * Generic Duration component impl.
+         * A generic duration component implementation.
+         * <p>
+         * Represents the processing time of a recipe, measured in game ticks
+         * (20 ticks = 1 second). Use the static factory methods for common
+         * units.
+         * </p>
+         *
+         * @see #ticks(int)
+         * @see #seconds(int)
+         * @see #minutes(int)
          */
         public record GenericDuration(int duration, int x, int y, int width, int height) implements TDurationComponent
         {
+            /**
+             * Creates a duration with default position and size.
+             *
+             * @param duration the duration in ticks
+             */
             public GenericDuration(int duration) {
                 this(duration, 0, 0, 18, 18);
             }
