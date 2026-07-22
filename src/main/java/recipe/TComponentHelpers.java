@@ -8,6 +8,7 @@ import java.util.Map;
 /**
  * Simple implementations of recipe components.
  */
+@SuppressWarnings("unused")
 public class TComponentHelpers
 {
     /**
@@ -149,7 +150,7 @@ public class TComponentHelpers
         }
 
         @Override
-        public String getId() {
+        public String id() {
             return slotId;
         }
 
@@ -282,80 +283,67 @@ public class TComponentHelpers
         }
     }
 
+    /**
+     * A generic duration component implementation.
+     * <p>
+     * Represents the processing time of a recipe, measured in game ticks
+     * (20 ticks = 1 second). Use the static factory methods for common
+     * units.
+     * </p>
+     *
+     * @see #ticks(int)
+     * @see #seconds(int)
+     * @see #minutes(int)
+     */
+    public record GenericDuration(int duration, int x, int y, int width, int height) implements TDurationComponent
+    {
         /**
-         * A generic duration component implementation.
-         * <p>
-         * Represents the processing time of a recipe, measured in game ticks
-         * (20 ticks = 1 second). Use the static factory methods for common
-         * units.
-         * </p>
+         * Creates a duration with default position and size.
          *
-         * @see #ticks(int)
-         * @see #seconds(int)
-         * @see #minutes(int)
+         * @param duration the duration in ticks
          */
-        public record GenericDuration(int duration, int x, int y, int width, int height) implements TDurationComponent
-        {
-            /**
-             * Creates a duration with default position and size.
-             *
-             * @param duration the duration in ticks
-             */
-            public GenericDuration(int duration) {
-                this(duration, 0, 0, 18, 18);
-            }
-
-            /**
-             * Creates a duration in ticks.
-             */
-            public static GenericDuration ticks(int ticks) {
-                return new GenericDuration(ticks);
-            }
-
-            /**
-             * Creates a duration in seconds.
-             */
-            public static GenericDuration seconds(int seconds) {
-                return new GenericDuration(seconds * 20);
-            }
-
-            /**
-             * Creates a duration in minutes.
-             */
-            public static GenericDuration minutes(int minutes) {
-                return new GenericDuration(minutes * 20 * 60);
-            }
-
-            public GenericDuration bounds(int x, int y, int width, int height) {
-                return new GenericDuration(duration, x, y, width, height);
-            }
+        public GenericDuration(int duration) {
+            this(duration, 0, 0, 18, 18);
         }
+
+        /**
+         * Creates a duration in ticks.
+         */
+        public static GenericDuration ticks(int ticks) {
+            return new GenericDuration(ticks);
+        }
+
+        /**
+         * Creates a duration in seconds.
+         */
+        public static GenericDuration seconds(int seconds) {
+            return new GenericDuration(seconds * 20);
+        }
+
+        /**
+         * Creates a duration in minutes.
+         */
+        public static GenericDuration minutes(int minutes) {
+            return new GenericDuration(minutes * 20 * 60);
+        }
+
+        public GenericDuration bounds(int x, int y, int width, int height) {
+            return new GenericDuration(duration, x, y, width, height);
+        }
+    }
 
     /**
      * Custom component impl.
      */
-    public static class Custom implements TRecipeComponent
+    public record Custom(String id, String category, Map<String, Object> data, int x, int y, int width,
+                         int height) implements TRecipeComponent
     {
-        private final String id;
-        private final String category;
-        private final Map<String, Object> data;
-        private final int x;
-        private final int y;
-        private final int width;
-        private final int height;
-
         public Custom(String id, String category) {
             this(id, category, 0, 0, 18, 18);
         }
 
         public Custom(String id, String category, int x, int y, int width, int height) {
-            this.id = id;
-            this.category = category;
-            this.data = new HashMap<>();
-            this.x = x;
-            this.y = y;
-            this.width = width;
-            this.height = height;
+            this(id, category, new HashMap<>(), x, y, width, height);
         }
 
         /**
@@ -380,38 +368,8 @@ public class TComponentHelpers
         }
 
         @Override
-        public String getCategory() {
-            return category;
-        }
-
-        @Override
-        public String getId() {
-            return id;
-        }
-
-        @Override
-        public Map<String, Object> getData() {
+        public Map<String, Object> data() {
             return new HashMap<>(data);
-        }
-
-        @Override
-        public int x() {
-            return x;
-        }
-
-        @Override
-        public int y() {
-            return y;
-        }
-
-        @Override
-        public int width() {
-            return width;
-        }
-
-        @Override
-        public int height() {
-            return height;
         }
     }
 

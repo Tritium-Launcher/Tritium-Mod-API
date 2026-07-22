@@ -17,6 +17,7 @@ import java.util.Map;
  *                    used when rendering that slot type on this recipe UI.
  * @see TSpriteRegion
  */
+@SuppressWarnings("unused")
 public record TRecipeSprite(
         String imagePath,
         int width,

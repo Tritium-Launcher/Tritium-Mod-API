@@ -6,6 +6,7 @@ import java.util.Map;
 /**
  * Metadata for a custom value type that Tritium can render.
  */
+@SuppressWarnings("unused")
 public interface TCustomTypeDescriptor
 {
     String getTypeId();

@@ -6,6 +6,7 @@ import java.util.*;
 /**
  * Normalized recipe display data emitted into Tritium dump files.
  */
+@SuppressWarnings("unused")
 public record TNormalizedRecipeView(
         String mode,
         @Nullable String descriptorId,
@@ -16,10 +17,10 @@ public record TNormalizedRecipeView(
 )
 {
     public TNormalizedRecipeView {
-        bindings = bindings == null ? Collections.emptyList() : List.copyOf(bindings);
-        inputs = inputs == null ? Collections.emptyList() : List.copyOf(inputs);
-        outputs = outputs == null ? Collections.emptyList() : List.copyOf(outputs);
-        properties = properties == null ? Collections.emptyMap() : Collections.unmodifiableMap(new LinkedHashMap<>(properties));
+        bindings = List.copyOf(bindings);
+        inputs = List.copyOf(inputs);
+        outputs = List.copyOf(outputs);
+        properties = Collections.unmodifiableMap(new LinkedHashMap<>(properties));
     }
 
     public static Builder descriptor(String descriptorId) {
@@ -40,13 +41,14 @@ public record TNormalizedRecipeView(
      */
     public static final class Builder {
         private final String mode;
+        @Nullable
         private final String descriptorId;
         private final List<TRecipeBinding> bindings = new ArrayList<>();
         private final List<TRenderedValue> inputs = new ArrayList<>();
         private final List<TRenderedValue> outputs = new ArrayList<>();
         private final Map<String, Object> properties = new LinkedHashMap<>();
 
-        private Builder(String mode, String descriptorId) {
+        private Builder(String mode, @Nullable String descriptorId) {
             this.mode = mode;
             this.descriptorId = descriptorId;
         }

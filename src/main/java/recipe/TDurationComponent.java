@@ -12,17 +12,17 @@ public interface TDurationComponent extends TRecipeComponent
     int duration();
 
     @Override
-    default String getCategory() {
+    default String category() {
         return "DURATION";
     }
 
     @Override
-    default String getId() {
+    default String id() {
         return "duration";
     }
 
     @Override
-    default Map<String, Object> getData() {
+    default Map<String, Object> data() {
         Map<String, Object> data = new HashMap<>();
         data.put("duration", duration());
         return data;

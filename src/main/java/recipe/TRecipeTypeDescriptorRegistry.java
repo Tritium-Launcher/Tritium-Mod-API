@@ -9,6 +9,7 @@ import java.util.Optional;
  *
  * @see TRecipeTypeDescriptor
  */
+@SuppressWarnings("unused")
 public class TRecipeTypeDescriptorRegistry
 {
 

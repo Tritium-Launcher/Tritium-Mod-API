@@ -31,17 +31,17 @@ public interface TEnergyComponent extends TRecipeComponent
     }
 
     @Override
-    default String getCategory() {
+    default String category() {
         return "ENERGY";
     }
 
     @Override
-    default String getId() {
+    default String id() {
         return "energy";
     }
 
     @Override
-    default Map<String, Object> getData() {
+    default Map<String, Object> data() {
         Map<String, Object> data = new HashMap<>();
         data.put("energyType", getEnergyType());
         data.put("amountPerOperation", getAmountPerOperation());

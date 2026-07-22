@@ -30,6 +30,6 @@ public record TCustomTypeEntry(
      * Defensively copies and protects the {@code rawData} map.
      */
     public TCustomTypeEntry {
-        rawData = rawData == null ? Collections.emptyMap() : Collections.unmodifiableMap(new LinkedHashMap<>(rawData));
+        rawData = Collections.unmodifiableMap(new LinkedHashMap<>(rawData));
     }
 }

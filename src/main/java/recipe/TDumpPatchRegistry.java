@@ -8,6 +8,7 @@ import java.util.List;
  * Global registry for {@link TDumpPatch} instances.
  * Patches are invoked after all dump tasks finish and before manifest finalization.
  */
+@SuppressWarnings("unused")
 public final class TDumpPatchRegistry
 {
     private static final List<TDumpPatch> patches = new ArrayList<>();

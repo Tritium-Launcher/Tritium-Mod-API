@@ -1,6 +1,5 @@
 package recipe;
 
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -9,7 +8,7 @@ import java.util.List;
 public record TRecipeBinding(String componentId, List<TRenderedValue> entries)
 {
     public TRecipeBinding {
-        entries = entries == null ? Collections.emptyList() : List.copyOf(entries);
+        entries = List.copyOf(entries);
     }
 
     public static TRecipeBinding of(String componentId, List<TRenderedValue> entries) {

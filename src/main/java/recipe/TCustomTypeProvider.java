@@ -14,6 +14,7 @@ import java.util.Collection;
  * @see TCustomTypeEntry
  * @see TCustomTypeRegistry
  */
+@SuppressWarnings("unused")
 public interface TCustomTypeProvider
 {
     /**

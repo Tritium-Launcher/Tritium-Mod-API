@@ -53,12 +53,12 @@ public interface TSlotComponent extends TRecipeComponent
     }
 
     @Override
-    default String getCategory() {
+    default String category() {
         return "SLOT";
     }
 
     @Override
-    default Map<String, Object> getData() {
+    default Map<String, Object> data() {
         Map<String, Object> data = new HashMap<>();
         data.put("slotType", getSlotType());
         data.put("valueType", getSlotType().toLowerCase());

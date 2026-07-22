@@ -5,6 +5,7 @@ package recipe;
  *
  * @see TUILayout
  */
+@SuppressWarnings("unused")
 public interface TUIElement
 {
     /**

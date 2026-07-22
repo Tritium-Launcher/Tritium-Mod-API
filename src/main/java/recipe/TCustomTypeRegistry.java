@@ -8,6 +8,7 @@ import java.util.Optional;
 /**
  * Central registry for custom value type providers.
  */
+@SuppressWarnings("unused")
 public final class TCustomTypeRegistry
 {
     private static final Map<String, TCustomTypeProvider> PROVIDERS = new LinkedHashMap<>();

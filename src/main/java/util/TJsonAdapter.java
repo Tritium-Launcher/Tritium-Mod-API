@@ -8,6 +8,7 @@ import java.util.Optional;
  * Used for custom JSON serialization and deserialization adapters.
  * This is generally for converting Minecraft CODECS.
  */
+@SuppressWarnings("unused")
 public interface TJsonAdapter
 {
     /**

@@ -9,6 +9,7 @@ import java.nio.file.Path;
  * <p>
  * Register via {@link TDumpPatchRegistry#register(TDumpPatch)}.
  */
+@SuppressWarnings("unused")
 public interface TDumpPatch
 {
     /**

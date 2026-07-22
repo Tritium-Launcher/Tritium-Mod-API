@@ -23,13 +23,13 @@ public interface TRecipeComponent
      * </p>
      * @return The component category string
      */
-    String getCategory();
+    String category();
 
     /**
      * Gets the ID of this component.
      * @return The component ID string
      */
-    String getId();
+    String id();
 
     /**
      * @return X coordinate on the recipe background texture.
@@ -64,5 +64,5 @@ public interface TRecipeComponent
      *
      * @return Map of component data
      */
-    Map<String, Object> getData();
+    Map<String, Object> data();
 }

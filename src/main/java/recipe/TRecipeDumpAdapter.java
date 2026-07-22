@@ -3,6 +3,7 @@ package recipe;
 /**
  * Converts runtime recipes into Tritium's normalized recipe display model.
  */
+@SuppressWarnings("unused")
 public interface TRecipeDumpAdapter
 {
     /**

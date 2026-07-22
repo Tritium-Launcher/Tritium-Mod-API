@@ -7,6 +7,7 @@ import java.util.Map;
 /**
  * A normalized recipe ingredient/result entry for Tritium rendering.
  */
+@SuppressWarnings("unused")
 public record TRenderedValue(
         String refType,
         String valueType,
@@ -17,7 +18,7 @@ public record TRenderedValue(
 )
 {
     public TRenderedValue {
-        metadata = metadata == null ? Collections.emptyMap() : Collections.unmodifiableMap(new LinkedHashMap<>(metadata));
+        metadata = Collections.unmodifiableMap(new LinkedHashMap<>(metadata));
     }
 
     public static TRenderedValue item(String id, long amount) {

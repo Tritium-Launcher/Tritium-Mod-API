@@ -30,6 +30,7 @@ import java.util.Map;
  *                        Maps variant key → option key → default value.
  *                        The launcher applies these when the variant changes.
  */
+@SuppressWarnings("unused")
 public record GenerationTemplates(
     @Nullable String variantOption,
     @Nullable String autoValue,
@@ -46,21 +47,14 @@ public record GenerationTemplates(
      * variant entries, and protects the {@code variantDefaults} map.
      */
     public GenerationTemplates {
-        if (formats == null) {
-            formats = Collections.emptyMap();
-        } else {
-            Map<String, Map<String, String>> copy = new LinkedHashMap<>();
-            for (var entry : formats.entrySet()) {
-                String fmtId = entry.getKey();
-                Map<String, String> variants = entry.getValue();
-                if (variants == null || variants.isEmpty()) continue;
-                copy.put(fmtId, Collections.unmodifiableMap(new LinkedHashMap<>(variants)));
-            }
-            formats = Collections.unmodifiableMap(copy);
+        Map<String, Map<String, String>> copy = new LinkedHashMap<>();
+        for (var entry : formats.entrySet()) {
+            String fmtId = entry.getKey();
+            Map<String, String> variants = entry.getValue();
+            if (variants.isEmpty()) continue;
+            copy.put(fmtId, Collections.unmodifiableMap(new LinkedHashMap<>(variants)));
         }
-        if (variantDefaults == null) {
-            variantDefaults = Collections.emptyMap();
-        }
+        formats = Collections.unmodifiableMap(copy);
     }
 
     /**

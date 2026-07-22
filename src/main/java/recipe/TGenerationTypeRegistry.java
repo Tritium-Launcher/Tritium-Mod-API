@@ -10,9 +10,10 @@ import java.util.Optional;
  * <p>
  * Built-in formats ({@code json}, {@code kubejs}) are registered automatically
  * when this class is loaded. Mods may register additional formats during their
- * initialisation phase.
+ * initialization phase.
  * </p>
  */
+@SuppressWarnings("unused")
 public final class TGenerationTypeRegistry
 {
     private static final Map<String, TGenerationFormat> FORMATS = new LinkedHashMap<>();

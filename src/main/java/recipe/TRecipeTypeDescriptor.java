@@ -10,6 +10,7 @@ import java.util.Optional;
 /**
  * Descriptions for custom recipe types.
  */
+@SuppressWarnings("unused")
 public interface TRecipeTypeDescriptor
 {
     /**
@@ -50,7 +51,7 @@ public interface TRecipeTypeDescriptor
      * {@link #getUILayout()} and {@link #getComponents()}. Override this method
      * when you need to provide slot regions that differ from the raw component
      * list (e.g. to exclude energy/duration indicators or to supply richer
-     * labelling).
+     * labeling).
      * </p>
      *
      * @return The recipe sprite descriptor
@@ -60,7 +61,7 @@ public interface TRecipeTypeDescriptor
         TUILayout layout = getUILayout();
         List<TSpriteRegion> regions = new java.util.ArrayList<>();
         for (TRecipeComponent comp : getComponents()) {
-            String role = switch (comp.getCategory()) {
+            String role = switch (comp.category()) {
                 case "SLOT" -> {
                     boolean isInput = comp instanceof TSlotComponent && ((TSlotComponent) comp).isInput();
                     yield isInput ? "INPUT" : "OUTPUT";
@@ -71,11 +72,11 @@ public interface TRecipeTypeDescriptor
             };
             String slotType = comp instanceof TSlotComponent
                     ? ((TSlotComponent) comp).getSlotType()
-                    : comp.getCategory();
+                    : comp.category();
             boolean displayOnly = comp instanceof TSlotComponent && ((TSlotComponent) comp).isDisplayOnly();
             regions.add(new TSpriteRegion(
-                    comp.getId(),
-                    comp instanceof TSlotComponent ? ((TSlotComponent) comp).getDisplayName() : comp.getId(),
+                    comp.id(),
+                    comp instanceof TSlotComponent ? ((TSlotComponent) comp).getDisplayName() : comp.id(),
                     role,
                     slotType,
                     comp.x(),
@@ -107,7 +108,7 @@ public interface TRecipeTypeDescriptor
      * <p>
      * When the recipe builder renders a slot whose {@code slotType} matches a key
      * in this map, it will use the corresponding sprite as the slot background
-     * instead of the default coloured overlay. Texture paths use resource location
+     * instead of the default colored overlay. Texture paths use resource location
      * format.
      * </p>
      *

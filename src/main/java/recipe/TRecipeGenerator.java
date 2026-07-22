@@ -16,6 +16,7 @@ import java.util.Map;
  *
  * @see TRecipeTypeDescriptor#getRecipeGenerator()
  */
+@SuppressWarnings("unused")
 public interface TRecipeGenerator {
 
     /**

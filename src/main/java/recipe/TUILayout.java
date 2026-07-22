@@ -12,6 +12,7 @@ import java.util.List;
  *
  * @see TUIElement
  */
+@SuppressWarnings("unused")
 public interface TUILayout
 {
     /**

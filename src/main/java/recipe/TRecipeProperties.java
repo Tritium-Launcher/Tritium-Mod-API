@@ -5,6 +5,7 @@ import java.util.Optional;
 /**
  * Additional properties for Recipe Types.
  */
+@SuppressWarnings("unused")
 public interface TRecipeProperties
 {
     /**

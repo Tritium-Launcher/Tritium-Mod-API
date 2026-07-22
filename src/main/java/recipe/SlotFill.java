@@ -16,6 +16,7 @@ import java.util.Map;
  * @param data    Optional NBT / Data Component key-value pairs
  *                (e.g. {@code {"minecraft:custom_name": "\"My Sword\""}}).
  */
+@SuppressWarnings("unused")
 public record SlotFill(
         String itemId,
         long quantity,
@@ -36,8 +37,6 @@ public record SlotFill(
      * Defensively copies and protects the {@code data} map.
      */
     public SlotFill {
-        data = data == null
-                ? Collections.emptyMap()
-                : Collections.unmodifiableMap(new LinkedHashMap<>(data));
+        data = Collections.unmodifiableMap(new LinkedHashMap<>(data));
     }
 }
