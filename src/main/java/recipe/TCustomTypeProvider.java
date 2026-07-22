@@ -1,5 +1,6 @@
 package recipe;
 
+import org.jspecify.annotations.Nullable;
 import java.util.Collection;
 
 /**
@@ -9,5 +10,5 @@ public interface TCustomTypeProvider
 {
     TCustomTypeDescriptor getDescriptor();
 
-    Collection<TCustomTypeEntry> dumpValues(Object server);
+    Collection<TCustomTypeEntry> dumpValues(@Nullable Object server);
 }

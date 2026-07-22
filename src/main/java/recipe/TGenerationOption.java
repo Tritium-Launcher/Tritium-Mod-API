@@ -1,9 +1,11 @@
 package recipe;
 
+import org.jspecify.annotations.Nullable;
+
 public record TGenerationOption(
     String key,
     String label,
     String type,
-    String placeholder,
-    String defaultValue
+    @Nullable String placeholder,
+    @Nullable String defaultValue
 ) {}

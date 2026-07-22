@@ -1,5 +1,6 @@
 package recipe;
 
+import org.jspecify.annotations.Nullable;
 import java.util.*;
 
 /**
@@ -7,7 +8,7 @@ import java.util.*;
  */
 public record TNormalizedRecipeView(
         String mode,
-        String descriptorId,
+        @Nullable String descriptorId,
         List<TRecipeBinding> bindings,
         List<TRenderedValue> inputs,
         List<TRenderedValue> outputs,

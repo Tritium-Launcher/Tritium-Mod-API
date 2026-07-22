@@ -1,5 +1,6 @@
 package recipe;
 
+import org.jspecify.annotations.Nullable;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
@@ -42,7 +43,7 @@ public interface TRecipeGenerator {
      *
      * @return generation templates, or {@code null} to rely on in-game generation
      */
-    default GenerationTemplates getGenerationTemplates() {
+    default @Nullable GenerationTemplates getGenerationTemplates() {
         return null;
     }
 

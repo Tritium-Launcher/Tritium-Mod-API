@@ -26,6 +26,7 @@ repositories {
 
 dependencies {
     implementation("com.google.code.gson:gson:2.13.2")
+    api("org.jspecify:jspecify:1.0.0")
 }
 
 mavenPublishing {

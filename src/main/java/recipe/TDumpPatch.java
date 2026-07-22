@@ -1,5 +1,6 @@
 package recipe;
 
+import org.jspecify.annotations.Nullable;
 import java.nio.file.Path;
 
 /**
@@ -17,5 +18,5 @@ public interface TDumpPatch
      * @param gameContext opaque game context (e.g. a Minecraft client or server instance);
      *                    may be {@code null} if not available
      */
-    void apply(Path snapshotDir, Object gameContext);
+    void apply(Path snapshotDir, @Nullable Object gameContext);
 }

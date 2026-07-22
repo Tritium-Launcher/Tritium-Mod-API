@@ -1,5 +1,6 @@
 package recipe;
 
+import org.jspecify.annotations.Nullable;
 import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
@@ -30,10 +31,10 @@ import java.util.Map;
  *                        The launcher applies these when the variant changes.
  */
 public record GenerationTemplates(
-    String variantOption,
-    String autoValue,
+    @Nullable String variantOption,
+    @Nullable String autoValue,
     boolean expectsGrid,
-    String gridSlots,
+    @Nullable String gridSlots,
     int gridCols,
     Map<String, Map<String, String>> formats,
     Map<String, Map<String, String>> variantDefaults
